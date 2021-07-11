@@ -1,5 +1,3 @@
-// 63ECuY&A34MPoKNGVI@q
-
 const express=require('express');
 const app=express();
 
@@ -44,9 +42,6 @@ app.get('/transfer/:id', (req, res) => {
     Customer.find().then(result => {
         res.render('transfer', { customers: result, id: id });
     });
-    // Customer.findById(id).then(result => {
-    //     res.render('transfer', { customer: result });
-    // });
 });
 
 app.post('/transfer/:id', (req, res) => {
@@ -65,7 +60,6 @@ app.post('/transfer/:id', (req, res) => {
             Customer.find().then(result => {
                 res.render('transfer', { customers: result, id: senderID, errors: errors });
             });
-            // alert("Enter a Valid Amount!");
         }
         else if(parseInt(amount)>parseInt(senderBalance))
         {
@@ -74,7 +68,6 @@ app.post('/transfer/:id', (req, res) => {
             Customer.find().then(result => {
                 res.render('transfer', { customers: result, id: senderID, errors: errors });
             });
-            // alert("Insufficient Funds!\nTry Again with a lesser amount!");
         }
         else
         {
@@ -92,7 +85,6 @@ app.post('/transfer/:id', (req, res) => {
                     Customer.find().then(result => {
                         res.render('transfer', { customers: result, id: senderID, errors: errors });
                     });
-                    // alert("Receiver does not exist!");
                 } else {
                     const updatedReceiverBalance = data.balance + parseInt(amount);
                     Customer.findOneAndUpdate({ name: receiverName }, { balance: updatedReceiverBalance }, (err, data) => {

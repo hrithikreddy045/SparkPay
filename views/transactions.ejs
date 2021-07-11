@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('./partials/head.ejs') %>
-    <title>Transactions Page</title>
+    <title>SparkPay | Transactions</title>
 </head>
 <body>
     <%- include('./partials/navbar.ejs') %>
@@ -15,25 +15,24 @@
                 <% if(transactions.length>0) { %>
                     <table>
                         <tr>
-                            <td><h5>Reference ID</h5></td>
+                            <td><h5>Transaction ID</h5></td>
                             <td><h5>Sender</h5></td>
                             <td><h5>Receiver</h5></td>
                             <td><h5>Amount</h5></td>
                             <td><h5>Time</h5></td>
                         </tr>
-                    <% transactions.forEach(transaction => { %>
-                        <tr>
-                            <td><%= transaction._id %></td>
-                            <td><%= transaction.sender %></td>
-                            <td><%= transaction.receiver %></td>
-                            <td><%= transaction.amount %></td>
-                            <!-- <td><%= transaction.createdAt %></td> -->
-                            <% var timestamp=transaction.time; %>
-                            <% var date=new Date(timestamp); %>
-                            <% var time=(date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()); %>
-                            <td><%= time %></td>
-                        </tr>
-                    <% }) %>
+                        <% for(var i=transactions.length-1;i>=0;i--) { %>
+                            <tr>
+                                <td><%= transactions[i]._id %></td>
+                                <td><%= transactions[i].sender %></td>
+                                <td><%= transactions[i].receiver %></td>
+                                <td><%= transactions[i].amount %></td>
+                                <% var timestamp=transactions[i].time; %>
+                                <% var date=new Date(timestamp); %>
+                                <% var time=(date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+(date.getMinutes())+":"+date.getSeconds()); %>
+                                <td><%= time %></td>
+                            </tr>
+                        <% } %>
                     </table>
                 <% } else { %>
                     <div style="display: flex;">
