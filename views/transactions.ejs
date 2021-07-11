@@ -36,11 +36,14 @@
                     <% }) %>
                     </table>
                 <% } else { %>
-                    <p style="font-size: 1.2em; text-align: left;">There are no transactions.</p>
+                    <div style="display: flex;">
+                        <i style="padding-top: 18px;" class="material-icons">warning</i> &nbsp;
+                        <p style="font-size: 1.2em; text-align: left;">There are no transactions.</p>
+                    </div>
                 <% } %>
             </tr>
         </table>
     </div>
-    <!-- <%- include('./partials/footer.ejs') %> -->
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>

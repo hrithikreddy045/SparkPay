@@ -6,18 +6,19 @@
 </head>
 <body>
     <%- include('./partials/navbar.ejs') %>
-    <div style="font-size: 1.2em;" class="container">
-        <table style="margin-top: 10px;">
-            <tr><td><strong>Bank ID</strong></td><td> : </td><td><%= customer._id %></td></tr>
-            <tr><td><strong>Name</strong></td><td> : </td><td><%= customer.name %></td></tr>
-            <tr><td><strong>email</strong></td><td> : </td><td><%= customer.email %></td></tr>
-            <tr><td><strong>Balance</strong></td><td> : </td><td><%= customer.balance %></td></tr>
+    <div style="font-size: 1.2em;" class="center container">
+        <h3>Customer Details</h3>
+        <table class="center container" style="margin-top: 10px;">
+            <tr style="border: 0;"><td><strong>Bank ID</strong></td><td> : </td><td><%= customer._id %></td></tr>
+            <tr style="border: 0;"><td><strong>Name</strong></td><td> : </td><td><%= customer.name %></td></tr>
+            <tr style="border: 0;"><td><strong>email</strong></td><td> : </td><td><%= customer.email %></td></tr>
+            <tr style="border: 0;"><td><strong>Balance</strong></td><td> : </td><td><%= customer.balance %></td></tr>
         </table>
     </div>
-    <div style="padding: 10px; margin-top: 10px;" class="container">
+    <div style="padding: 10px; margin-top: 10px;" class="center container">
         <a style="background-color: #ee6e73;" class="btn" href="/customers">Back</a>
         <a style="background-color: #ee6e73; margin-left: 20px;" class="btn" href="/transfer/<%= customer._id %>">Transfer</a>
     </div>
-    <!-- <%- include('./partials/footer.ejs') %> -->
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>
