@@ -5,46 +5,29 @@
     <title>Customers Page</title>
 </head>
 <body>
-    
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-        <h4>Customer Details</h4>
-        <div>
-            <h5>Bank ID : 98741368412460</h5>
-            <h5>Name    : Hrithik Reddy</h5>
-            <h5>email   : hrithikreddykandi@gmail.com</h5>
-            <h5>Balance : 45000</h5>
-        </div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-        </div>
-    </div>
 
     <%- include('./partials/navbar.ejs') %>
-    <h1 style="padding: 20px 10px; text-align: center;" class="container">Customers List</h1>
+    <h3 style="padding: 20px 10px; text-align: center;" class="container">Customers List</h3>
     <% if(customers.length > 0) { %>
         <% customers.forEach(customer => { %>
-            <div class="container">
-                <ul class="collection with-header">
-                    <li class="collection-item">
-                        <div>
-                            <table>
-                                <tr>
-                                    <td class="container"><strong><%= customer.name %></strong></td>
-                                    <td>
-                                        <!-- Modal Trigger -->
-                                        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">View</a>
-                                    </td>
-                                    <!-- <td><a data-target="modal1" class="modal-trigger waves-effect waves-light btn" href="#modal1">View</a></td> -->
-                                    <td><a class="waves-effect waves-light btn" href="/transfer">Transfer</a></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </li>
-                </ul>
+        <div class="container">
+        <ul class="collection with-header">
+            <li style="padding: 0 0 0 10px;" class="collection-item">
+            <div>
+            <table>
+                <tr style="border: 0;">
+                    <td class="container"><strong><%= customer.name %></strong></td>
+                    <!-- Modal Trigger -->
+                    <!-- <td><a style="background-color: #ee6e73;" data-target="modal1" class="modal-trigger waves-effect waves-light btn" href="/customer-details">View</a></td> -->
+
+                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/customer/<%= customer._id %>">View</a></td>
+                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/transfer/<%= customer._id %>">Transfer</a></td>
+                </tr>
+            </table>
             </div>
+            </li>
+        </ul>
+        </div>
     <% }); %>
     <% } else { %>
         <br>
@@ -53,13 +36,31 @@
         </ul>
     <% } %>
 
+    <!-- <%- include('./partials/footer.ejs') %> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
-          });
+          }); 
     </script>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+        <h4>Customer Details</h4><br>
+        <div>
+            <h5>Bank ID : </h5>
+            <h5>Name    : </h5>
+            <h5>email   : </h5>
+            <h5>Balance : </h5>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
 
 </body>
 </html>

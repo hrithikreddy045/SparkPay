@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Transactions Page</title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="center container">
+        <h3>Transactions Page</h3>
+    </div>
+    <div class="center container">
+        <table>
+            <tr>
+                <% if(transactions.length>0) { %>
+                    <table>
+                        <tr>
+                            <td><h5>Reference ID</h5></td>
+                            <td><h5>Sender</h5></td>
+                            <td><h5>Receiver</h5></td>
+                            <td><h5>Amount</h5></td>
+                            <td><h5>Time</h5></td>
+                        </tr>
+                    <% transactions.forEach(transaction => { %>
+                        <tr>
+                            <td><%= transaction._id %></td>
+                            <td><%= transaction.sender %></td>
+                            <td><%= transaction.receiver %></td>
+                            <td><%= transaction.amount %></td>
+                            <!-- <td><%= transaction.createdAt %></td> -->
+                            <% var timestamp=transaction.time; %>
+                            <% var date=new Date(timestamp); %>
+                            <% var time=(date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()); %>
+                            <td><%= time %></td>
+                        </tr>
+                    <% }) %>
+                    </table>
+                <% } else { %>
+                    <p style="font-size: 1.2em; text-align: left;">There are no transactions.</p>
+                <% } %>
+            </tr>
+        </table>
+    </div>
+    <!-- <%- include('./partials/footer.ejs') %> -->
+</body>
+</html>
