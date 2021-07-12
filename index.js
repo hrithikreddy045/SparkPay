@@ -1,5 +1,3 @@
-// 63ECuY&A34MPoKNGVI@q
-
 const express=require('express');
 const app=express();
 
@@ -117,4 +115,4 @@ app.get('/transactions', (req, res) => {
     });
 });
 
-app.listen(7000, console.log("Server running on PORT "+PORT));
+app.listen(PORT, console.log("Server running on PORT "+PORT));
