@@ -9,26 +9,26 @@
     <%- include('./partials/navbar.ejs') %>
     <h3 style="padding: 20px 10px; text-align: center;" class="container">Customers List</h3>
     <% if(customers.length > 0) { %>
-        <% customers.forEach(customer => { %>
+        <% for(var i=0;i< customers.length;i++){ %>
         <div class="container">
         <ul class="collection with-header">
             <li style="padding: 0 0 0 10px;" class="collection-item">
             <div>
             <table>
                 <tr style="border: 0;">
-                    <td class="container"><strong><%= customer.name %></strong></td>
+                    <td class="container"><strong><%= customers[i].name %></strong></td>
                     <!-- Modal Trigger -->
                     <!-- <td><a style="background-color: #ee6e73;" data-target="modal1" class="modal-trigger waves-effect waves-light btn" href="/customer-details">View</a></td> -->
 
-                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/customer/<%= customer._id %>">View</a></td>
-                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/transfer/<%= customer._id %>">Transfer</a></td>
+                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/customer/<%= customers[i]._id %>">View</a></td>
+                    <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/transfer/<%= customers[i]._id %>">Transfer</a></td>
                 </tr>
             </table>
             </div>
             </li>
         </ul>
         </div>
-    <% }); %>
+    <% } %>
     <% } else { %>
         <br>
         <ul class="container collection with-header">

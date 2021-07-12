@@ -46,16 +46,16 @@
         <h3 style="margin-bottom: 4 0px;">Transfer Page</h3>
         <form action="/transfer/<%= id %>" method="POST" class="col s12">
           <div class="center container">
-            <%- include('./partials/messages.ejs') %>
+            <!-- <%- include('./partials/messages.ejs') %> -->
             <div class="row center">
               <div class="input-field">
                 <i class="material-icons prefix">account_box</i>
-                <% customers.forEach(customer => { %>
-                  <% if(customer._id==id) { %>
-                    <% name=customer.name; %>
-                    <input disabled id="sender" type="text" class="validate" name="sender" value="<%= name %>">
+                <% for(var i=0;i< customers.length;i++){ %>
+                  <% if(customers[i]._id==id) { %>
+                    <% name=customers[i].name; %>
+                    <input disabled id="sender" type="text" class="validate" name="sender" value="<%= id %>">
                     <label for="sender">Sender</label>
-                  <% }}) %>
+                  <% }} %>
               </div>
             </div>
             <div class="row">
@@ -63,11 +63,11 @@
                 <i style="display: flex; padding-left: 7px; padding-top: 3px;" class="material-icons prefix">account_circle</i>
                 <select style="padding: 0; border: 0; border-bottom: 1px solid lightgray; max-width: 94%; margin-left: 6%; margin-top: 0; margin-bottom: 20px; width: 94%;" class="browser-default input-field col s12 validate" name="receiver">
                       <option value="" disabled selected>Transfer to</option>
-                  <% customers.forEach(customer => { %>
-                    <% if(customer.id!==id) { %>
-                      <option id="receiver" value="<%= customer.name %>" class="validate" name="receiver"><%= customer.name %> (Balance : <%= customer.balance %>)</option>
+                  <% for(var i=0;i< customers.length;i++){ %>
+                    <% if(customers[i].id!==id) { %>
+                      <option id="receiver" value="<%= customers[i].name %>" class="validate" name="receiver"><%= customers[i].name %> (Balance : <%= customers[i].balance %>)</option>
                     <% } %>
-                  <% }) %>
+                  <% } %>
                 </select>
                 <!-- <input id="receiver" type="text" class="validate" name="receiver">
                 <label for="receiver">Transfer to</label> -->
