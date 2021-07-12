@@ -108,38 +108,66 @@ app.post('/transfer/:id', (req, res) => {
     const senderID=req.params.id;
     const receiverName=req.body.receiver;
     const amount=req.body.amount;
-    Customer.find((err, data) => {
-        for(var i=0;i<data.length;i++)
-        {
-            if(data[i]._id==senderID)
+    let errors=[];
+    if(receiverName==null)
+    {
+        errors.push({ msg: "Receiver does not exist!" });
+        console.log("Receiver does not exist!");
+        Customer.find().then(result => {
+            res.render('transfer', { customers: result, id: senderID, errors });
+        });
+    }
+    else if(amount<=0)
+    {
+        errors.push({ msg: "Enter a Valid Amount!" });
+        console.log("Enter a Valid Amount!");
+        Customer.find().then(result => {
+            res.render('transfer', { customers: result, id: senderID, errors });
+        });
+    }
+    else
+    {
+        Customer.findById(senderID).then(sender => {
+            if(amount>sender.balance)
             {
-                Customer.findOneAndUpdate({ _id: senderID }, { balance: data[i].balance-parseInt(amount) }, (err, data) => {
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        console.log(data);
-                    }
+                errors.push({ msg: "Insufficient Funds!\nTry Again with a lesser amount!" });
+                console.log("Insufficient Funds!\nTry Again with a lesser amount!");
+                Customer.find().then(result => {
+                    res.render('transfer', { customers: result, id: senderID, errors });
                 });
             }
-            if(data[i].name==receiverName)
+            else
             {
-                Customer.findOneAndUpdate({ name: receiverName }, { balance: data[i].balance+parseInt(amount) }, (err, data) => {
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        console.log(data);
+                Customer.find((err, data) => {
+                    for(var i=0;i<data.length;i++)
+                    {
+                        if(data[i]._id==senderID)
+                        {
+                            Customer.findOneAndUpdate({ _id: senderID }, { balance: data[i].balance-parseInt(amount) }, (err, data) => {
+                                if(err) console.log(err);
+                            });
+                        }
+                        if(data[i].name==receiverName)
+                        {
+                            Customer.findOneAndUpdate({ name: receiverName }, { balance: data[i].balance+parseInt(amount) }, (err, data) => {
+                                if(err) console.log(err);
+                            });
+                        }
                     }
                 });
+                Customer.findById(senderID).then(sender => {
+                    const senderName=sender.name;
+                    const transaction=new Transaction({
+                        sender: senderName,
+                        receiver: receiverName,
+                        amount: amount
+                    });
+                    transaction.save();
+                });
+                res.redirect('/customers');
             }
-        }
-    });
-    const transaction=new Transaction({
-        sender: senderID,
-        receiver: receiverName,
-        amount: amount
-    });
-    transaction.save();
-    res.redirect('/customers');
+        });
+    }
 });
 
 app.get('/transactions', (req, res) => {
