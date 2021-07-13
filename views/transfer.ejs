@@ -69,8 +69,6 @@
                     <% } %>
                   <% } %>
                 </select>
-                <!-- <input id="receiver" type="text" class="validate" name="receiver">
-                <label for="receiver">Transfer to</label> -->
               </div>
             </div>
             <div class="row">
@@ -99,7 +97,7 @@
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           var elems = document.querySelectorAll('select');
-          var instances = M.FormSelect.init(elems, options);
+          var instances = M.FormSelect.init(elems);
         });
       </script>
 

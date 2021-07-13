@@ -17,9 +17,6 @@
             <table>
                 <tr style="border: 0;">
                     <td class="container"><strong><%= customers[i].name %></strong></td>
-                    <!-- Modal Trigger -->
-                    <!-- <td><a style="background-color: #ee6e73;" data-target="modal1" class="modal-trigger waves-effect waves-light btn" href="/customer-details">View</a></td> -->
-
                     <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/customer/<%= customers[i]._id %>">View</a></td>
                     <td><a style="background-color: #ee6e73;" class="waves-effect waves-light btn" href="/transfer/<%= customers[i]._id %>">Transfer</a></td>
                 </tr>
@@ -39,28 +36,6 @@
     <%- include('./partials/footer.ejs') %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
-          }); 
-    </script>
-
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-        <h4>Customer Details</h4><br>
-        <div>
-            <h5>Bank ID : </h5>
-            <h5>Name    : </h5>
-            <h5>email   : </h5>
-            <h5>Balance : </h5>
-        </div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-        </div>
-    </div>
 
 </body>
 </html>

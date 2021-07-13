@@ -1,4 +1,4 @@
-// This is the MongoDB Schema File.
+// This is the MongoDB Schema File for the Collection "Customers".
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
