@@ -1,4 +1,4 @@
-// This is the MongoDB Schema File for the collection "Trnsactions".
+// This is the MongoDB Schema File for the collection "Transactions".
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
